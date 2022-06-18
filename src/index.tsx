@@ -1,24 +1,16 @@
 /* @refresh reload */
-import { render } from "solid-js/web";
 
 import "tailwindcss/tailwind.css";
-import { Router } from "solid-app-router";
-
 import "./index.css";
 import App from "./App";
-import { createClient, Provider } from "urql";
-
-const client = createClient({
-  url: "http://localhost:8000/graphql",
-});
+import { render } from "solid-js/web";
+import { Router } from "solid-app-router";
 
 render(
   () => (
-    <Provider value={client}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <Router>
+      <App />
+    </Router>
   ),
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );

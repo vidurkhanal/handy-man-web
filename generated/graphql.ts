@@ -1,16 +1,16 @@
 import gql from "graphql-tag";
-import * as Urql from "@urql/core";
+import * as Urql from "urql";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type MakeOptional<T, K extends keyof T> =
+  & Omit<T, K>
+  & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> =
+  & Omit<T, K>
+  & { [SubKey in K]: Maybe<T[SubKey]> };
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -22,12 +22,12 @@ export type Scalars = {
 };
 
 export type CreateUserInput = {
-  readonly username?: InputMaybe<Scalars["String"]>;
+  username?: InputMaybe<Scalars["String"]>;
 };
 
 export type Mutation = {
-  readonly __typename?: "Mutation";
-  readonly createUser?: Maybe<User>;
+  __typename?: "Mutation";
+  createUser?: Maybe<User>;
 };
 
 export type MutationCreateUserArgs = {
@@ -35,8 +35,8 @@ export type MutationCreateUserArgs = {
 };
 
 export type Query = {
-  readonly __typename?: "Query";
-  readonly hello?: Maybe<Scalars["String"]>;
+  __typename?: "Query";
+  hello?: Maybe<Scalars["String"]>;
 };
 
 export type QueryHelloArgs = {
@@ -44,28 +44,25 @@ export type QueryHelloArgs = {
 };
 
 export type User = {
-  readonly __typename?: "User";
-  readonly id: Scalars["ID"];
-  readonly username: Scalars["String"];
+  __typename?: "User";
+  id: Scalars["ID"];
+  username: Scalars["String"];
 };
 
 export type HelloQueryVariables = Exact<{
-  Name: Scalars["String"];
+  name: Scalars["String"];
 }>;
 
-export type HelloQuery = {
-  readonly __typename?: "Query";
-  readonly hello?: string | null;
-};
+export type HelloQuery = { __typename?: "Query"; hello?: string | null };
 
 export const HelloDocument = gql`
-  query Hello($Name: String!) {
-    hello(name: $Name)
-  }
-`;
+    query Hello($name: String!) {
+  hello(name: $name)
+}
+    `;
 
 export function useHelloQuery(
-  options: Omit<Urql.UseQueryArgs<HelloQueryVariables>, "query">
+  options: Omit<Urql.UseQueryArgs<HelloQueryVariables>, "query">,
 ) {
   return Urql.useQuery<HelloQuery>({ query: HelloDocument, ...options });
 }
