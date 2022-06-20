@@ -8,6 +8,7 @@ import { createClient, Provider } from "solid-urql";
 
 const client = createClient({
   url: "http://localhost:8080/",
+  fetchOptions: { credentials: "include" },
 });
 
 const App: Component = () => {

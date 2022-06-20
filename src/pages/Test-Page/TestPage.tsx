@@ -18,11 +18,11 @@ const TestPage: Component = () => {
     setHello(res());
   });
 
+  // const [{data}] = useHelloQuery({variables:{name:"Man"}})
+
   return (
     <Show when={!queryState().fetching} fallback={<p>Loading...</p>}>
-      <p>
-        {hello()?.hello}
-      </p>
+      <p>{hello()?.hello}</p>
     </Show>
   );
 };
